@@ -12,7 +12,7 @@ setInterval(displayTime, 1000);
 // function for creating timeblocks for each working hour in html
 function createTimeBlocks(X) {
     var newDiv = $('<div>');
-    var newLabel = $('<lable>')
+    var newLabel = $('<lable>');
     var newTextArea = $('<textarea>');
     var newSaveBtn = $('<button>');
     
@@ -46,26 +46,30 @@ function createTimeBlocks(X) {
     var dt = new Date();
     var currentHour = dt.getHours();
 
-    if (X > 8 && currentHour < 13 && X === currentHour){
-        newTextArea.addClass('present');
-    } else if (X > 8 && currentHour < 13 && X < currentHour){
-        newTextArea.addClass('past');
-    } else if (X > 8 && currentHour < 13 && X > currentHour){
-        newTextArea.addClass('future');
+    if (X > 8 && currentHour < 13){
+        if (X === currentHour) {
+            newTextArea.addClass('present');
+        } else if (X < currentHour) {
+            newTextArea.addClass('past');
+        } else {
+            newTextArea.addClass('future');
+        } 
     } else if (X > 8 && currentHour > 12){
         newTextArea.addClass('past');
-    } else if (X < 6 && currentHour > 12 && X + 12 === currentHour){
-        newTextArea.addClass('present');
-    } else if (X < 6 && currentHour > 12 && X + 12 < currentHour){
-        newTextArea.addClass('past');
-    } else if (X < 6 && currentHour > 12 && X + 12 > currentHour){
-        newTextArea.addClass('future');
-    } else if (X < 6 && currentHour < 13){
+    } else if (X < 6 && currentHour > 12){
+        if (X + 12 === currentHour) {
+            newTextArea.addClass('present');
+        } else if (X + 12 < currentHour) {
+            newTextArea.addClass('past');
+        } else {
+            newTextArea.addClass('future');
+        }
+    } else if (X < 6 && currentHour < 13) {
         newTextArea.addClass('future');
     }
 }
 
 //loop for creating timeblocks automatically in html
 for (var i = 0; i < timeBlockEl.length; i++) {
-    createTimeBlocks(timeBlockEl[i])
+    createTimeBlocks(timeBlockEl[i]);
 }
