@@ -29,6 +29,10 @@
     <!--jquery and dayjs js files links move to top of html body-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 
     <title>Work Day Scheduler</title>
   </head>
@@ -38,9 +42,19 @@
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
+      <p id="display-time"></p>
     </header>
+
     <div class="container">
       <!-- Timeblocks go here -->
+      <!-- 
+        Create Timeblocks using function and loop in JS following the below format as guide:
+        <div class="row time-block" id="9am-row">
+          <label for="9amInput" class="col hour">9AM</label>  
+          <textarea id="9amInput" class="col-8"></textarea>
+          <button type="save" class="col saveBtn"><i class="fas fa-save"></i></button>
+        </div>
+      -->
     </div>
 
     <script src="./assets/js/script.js"></script>

@@ -22,6 +22,7 @@ header {
   padding: 60px;
 }
 
+/**/
 .description {
   white-space: pre-wrap;
 }
@@ -41,18 +42,21 @@ header {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
+/**/
 .past {
   background-color: #d3d3d3;
   color: white;
 }
-
+/**/
 .present {
   background-color: #ff6961;
   color: white;
 }
-
+/**/
 .future {
   background-color: #77dd77;
   color: white;
@@ -66,7 +70,7 @@ header {
   color: white;
 }
 
-.saveBtn i:hover {
+.saveBtn:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
