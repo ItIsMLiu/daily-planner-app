@@ -13,7 +13,7 @@ setInterval(displayTime, 1000);
 // function for creating timeblocks for each working hour in html
 function createTimeBlocks(X) {
     var newDiv = $('<div>');
-    var newLabel = $('<lable>');
+    var newLabel = $('<label>');
     var newTextArea = $('<textarea>');
     var newSaveBtn = $('<button>');
     
@@ -40,7 +40,7 @@ function createTimeBlocks(X) {
     newTextArea.attr('name', X);
 
     newDiv.append(newSaveBtn);
-    newSaveBtn.attr('type', 'save');
+    newSaveBtn.attr('type', 'button');
     newSaveBtn.attr('id', X);
     newSaveBtn.addClass('col saveBtn');
     newSaveBtn.append($('<i class="fas fa-save"></i>'));
@@ -107,23 +107,24 @@ function storedTasks () {
 saveBtnEl.on('click', function (event) {
     event.preventDefault();
     var element = event.target;
+    
     if (element.matches("button") === true) {
         var btnID = element.getAttribute("id");
+        var numericBtnID = +btnID
         if (btnID > 8) {
             var textAreaID = String(btnID + "amInput");
         } else {
             var textAreaID = String(btnID + "pmInput");
         }
-        
         var selectedTextAreaEl = document.getElementById(textAreaID);
         var taskText = selectedTextAreaEl.value.trim();
         
-        if (btnID > 8){
-            allTasks.splice(btnID-9, 1);
-            allTasks.splice(btnID-9, 0, taskText);
+        if (numericBtnID > 8){
+            allTasks.splice(numericBtnID-9, 1);
+            allTasks.splice(numericBtnID-9, 0, taskText);
         } else if (btnID < 6){
-            allTasks.splice(btnID+3, 1);
-            allTasks.splice(btnID+3, 0, taskText);
+            allTasks.splice(numericBtnID+3, 1);
+            allTasks.splice(numericBtnID+3, 0, taskText);
         }
 
         displayMessage("Task Successfully Saved!")
@@ -131,53 +132,3 @@ saveBtnEl.on('click', function (event) {
         renderTasks();
     }
 })
-
-/*
-
-
-init();
-
-function displayMessage (type, message) {
-    msgDiv.text(message);
-    msgDiv.attr('class', type);
-}
-
-function init() {
-    var storedTasks = JSON.parse(localStorage.getItem("dailyTasks"));
-    if (storedTasks !== null) {
-        dailyTasks = storedTasks;
-    }
-}
-
-
-
-
-
-saveBtnEl.on('click', function (event) {
-    event.preventDefault();
-    var element = event.target;
-    var saveID = element.getAttribute("id");
-    if (element.matches("button") === true) {
-        if (saveID < 13) {
-            var textAreaID = saveID + "amInput";
-            console.log (textAreaID);
-            localStorage.setItem("task", JSON.stringify($textAreaIA));
-        } else {
-            var textAreaID = saveID + "pmInput";
-            console.log (textAreaID);
-            localStorage.setItem("task", JSON.stringify($textAreaIA));
-        }
-    }
-}
-    
-
-});
-
-    if (X > 8) {
-        var amTextAreaID = X + "amInput";
-    } else {
-        var pmTextAreaID = X + "pmInput";
-    }
-   
-    console.log (amTextAreaID);
-*/
