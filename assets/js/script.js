@@ -81,6 +81,8 @@ var msgDiv = $('#msg');
 var saveBtnEl = $('.saveBtn');
 var allTasks = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
 
+init();
+
 function renderTasks() {
     for (var i = 0; i < timeBlockEl.length; i++){
         var hourlyTask = allTasks[i];
@@ -90,6 +92,9 @@ function renderTasks() {
 
 function displayMessage (message) {
     msgDiv.text(message);
+    setTimeout(function() {
+        msgDiv.text('');
+    }, 2000);
 }
 
 function init() {
@@ -107,10 +112,11 @@ function storedTasks () {
 saveBtnEl.on('click', function (event) {
     event.preventDefault();
     var element = event.target;
-    
-    if (element.matches("button") === true) {
-        var btnID = element.getAttribute("id");
-        var numericBtnID = +btnID
+    var btnID;
+    var numericBtnID;
+    if (element.matches("button") || element.matches("i")) {
+        btnID = element.closest(".saveBtn").getAttribute("id");
+        numericBtnID = +btnID
         if (btnID > 8) {
             var textAreaID = String(btnID + "amInput");
         } else {
@@ -127,7 +133,7 @@ saveBtnEl.on('click', function (event) {
             allTasks.splice(numericBtnID+3, 0, taskText);
         }
 
-        displayMessage("Task Successfully Saved!")
+        displayMessage("✅ Task Saved!")
         storedTasks();
         renderTasks();
     }

@@ -46,19 +46,19 @@ header {
   justify-content: center;
   align-items: center;
 }
-/**/
+
 .past {
-  background-color: #d3d3d3;
+  background-color: #8A8783;
   color: white;
 }
-/**/
+
 .present {
-  background-color: #ff6961;
+  background-color: #C62923;
   color: white;
 }
-/**/
+
 .future {
-  background-color: #77dd77;
+  background-color: #88A242;
   color: white;
 }
 
@@ -66,11 +66,20 @@ header {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #06aed5;
+  background-color: #4a90a0;
   color: white;
 }
 
 .saveBtn:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+/* styling for message */
+#msg {
+  color: rgb(69, 128, 71);
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+  margin-top: 8px;
 }
