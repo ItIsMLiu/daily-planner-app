@@ -1,16 +1,16 @@
-//declare global variable
+// Declare global variable
 var displayTimeEl = $('#display-time');
 var allTimeBlocks = $('.container');
 var timeBlockEl = [9, 10, 11, 12, 1, 2, 3, 4, 5];
 
-// displaying day and time
+// Displaying day and time
 function displayTime() {
     var timeNow = dayjs().format('dddd, MMMM DD, YYYY [at] h:mm A');
     displayTimeEl.text(timeNow);
 }
 setInterval(displayTime, 1000);
 
-// function for creating timeblocks for each working hour in html
+// Function for creating timeblocks for each working hour in html
 function createTimeBlocks(X) {
     var newDiv = $('<div>');
     var newLabel = $('<label>');
@@ -72,17 +72,19 @@ function createTimeBlocks(X) {
     }
 }
 
-//loop for creating timeblocks automatically in html
+// Loop for creating timeblocks automatically in html
 for (var i = 0; i < timeBlockEl.length; i++) {
     createTimeBlocks(timeBlockEl[i]);
 }
 
+// Declare global variable
 var msgDiv = $('#msg');
 var saveBtnEl = $('.saveBtn');
 var allTasks = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
 
 init();
 
+// Render tasks from the array.
 function renderTasks() {
     for (var i = 0; i < timeBlockEl.length; i++){
         var hourlyTask = allTasks[i];
@@ -90,6 +92,7 @@ function renderTasks() {
     }
 }
 
+// Display message with timeout function so message only display for 2s.
 function displayMessage (message) {
     msgDiv.text(message);
     setTimeout(function() {
@@ -97,6 +100,7 @@ function displayMessage (message) {
     }, 2000);
 }
 
+// Retrieve stored tasks from local storage by parsing the JSON string into an object. If 'allTasks' is successfully retrieved from localStorage, update the 'allTasks' array accordingly.
 function init() {
     var storedTasks = JSON.parse(localStorage.getItem("allTasks"));
     if (storedTasks !== null) {
@@ -105,36 +109,52 @@ function init() {
     renderTasks()
 }
 
+// Stringify and set "allTasks" key in localStorage to allTasks array.
 function storedTasks () {
     localStorage.setItem("allTasks", JSON.stringify(allTasks));
 }
 
+// When each save button is clicked...
 saveBtnEl.on('click', function (event) {
     event.preventDefault();
     var element = event.target;
     var btnID;
     var numericBtnID;
+
+    // If that element is a button or i element...
     if (element.matches("button") || element.matches("i")) {
+        // Get the id of button with class 'saveBtn'
         btnID = element.closest(".saveBtn").getAttribute("id");
+        // Change id string to number
         numericBtnID = +btnID
+
+        // Get Textarea Element id and store as string in a variable
         if (btnID > 8) {
             var textAreaID = String(btnID + "amInput");
         } else {
             var textAreaID = String(btnID + "pmInput");
         }
+
+        // Get Textarea element by its id, and get its input and stored in variable.
         var selectedTextAreaEl = document.getElementById(textAreaID);
         var taskText = selectedTextAreaEl.value.trim();
         
+        // Replace value from allTasks array by new task input using splice method.
         if (numericBtnID > 8){
             allTasks.splice(numericBtnID-9, 1);
             allTasks.splice(numericBtnID-9, 0, taskText);
-        } else if (btnID < 6){
+        } else if (numericBtnID < 6){
             allTasks.splice(numericBtnID+3, 1);
             allTasks.splice(numericBtnID+3, 0, taskText);
         }
 
-        displayMessage("✅ Task Saved!")
+        // Store updated allTasks in local Storage
         storedTasks();
+
+        // Display message alerting user that the iput is saved.
+        displayMessage("✅ Task Saved!")
+
+        //re-render the list
         renderTasks();
     }
 })

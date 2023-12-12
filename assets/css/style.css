@@ -22,7 +22,6 @@ header {
   padding: 60px;
 }
 
-/**/
 .description {
   white-space: pre-wrap;
 }
@@ -46,22 +45,22 @@ header {
   justify-content: center;
   align-items: center;
 }
-
+/* Background colour adjusted to better colour contrast with texts */
 .past {
   background-color: #8A8783;
   color: white;
 }
-
+/* Background colour adjusted to better colour contrast with texts */
 .present {
   background-color: #C62923;
   color: white;
 }
-
+/* Background colour adjusted to better colour contrast with texts */
 .future {
   background-color: #88A242;
   color: white;
 }
-
+/* Background colour adjusted to better colour contrast with texts */
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -69,13 +68,13 @@ header {
   background-color: #4a90a0;
   color: white;
 }
-
+/* adjusted so that when whole button is hover, it has the hover effect */
 .saveBtn:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
 
-/* styling for message */
+/* styling for 'task saved' message */
 #msg {
   color: rgb(69, 128, 71);
   font-weight: bold;
